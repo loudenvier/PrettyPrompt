@@ -5,6 +5,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
@@ -80,7 +81,7 @@ internal class StringBuilderWithCaret
 
     public void Insert(int index, ReadOnlySpan<char> text)
     {
-        sb.Insert(index, text);
+        sb.Insert(index, text.ToString());
         Caret += text.Length;
         InvokeChangedEvent();
     }
@@ -93,7 +94,9 @@ internal class StringBuilderWithCaret
     }
 
     public void Remove(TextSpan span) => Remove(span.Start, span.Length);
-    public StringBuilder.ChunkEnumerator GetChunks() => sb.GetChunks();
+    // public StringBuilder.ChunkEnumerator GetChunks() => sb.GetChunks();
+    public IEnumerable<Chunk> GetChunks() => [new Chunk(sb.ToString())];
+
     public override string ToString() => sb.ToString();
     public string ToString(int startIndex, int length) => sb.ToString(startIndex, length);
     public bool EqualsText(StringBuilderWithCaret other) => sb.Equals(other.sb);

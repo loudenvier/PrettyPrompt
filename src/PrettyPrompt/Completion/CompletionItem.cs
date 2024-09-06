@@ -100,13 +100,13 @@ public class CompletionItem
         ReadOnlySpan<char> valueShorter;
         if (pattern.Length <= FilterText.Length)
         {
-            valueLonger = FilterText;
+            valueLonger = FilterText.AsSpan();
             valueShorter = pattern;
         }
         else
         {
             valueLonger = pattern;
-            valueShorter = FilterText;
+            valueShorter = FilterText.AsSpan();
         }
 
         int priority;

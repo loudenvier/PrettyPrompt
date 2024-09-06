@@ -4,6 +4,8 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 #endregion
 
+using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace PrettyPrompt.Documents;
@@ -27,11 +29,18 @@ internal readonly struct ReadOnlyStringBuilder
     public string ToString(int startIndex, int length) => sb.ToString(startIndex, length);
 
     public void AppendTo(StringBuilder other) => other.Append(sb);
-    public StringBuilder.ChunkEnumerator GetChunks() => sb.GetChunks();
+    // public StringBuilder.ChunkEnumerator GetChunks() => sb.GetChunks();
+    public IEnumerable<Chunk> GetChunks() =>[new Chunk(sb.ToString())]; 
 
     public bool Equals(ReadOnlyStringBuilder other) => sb.Equals(other.sb);
     public bool Equals(ReadOnlyStringBuilder? other) => other.TryGet(out var otherValue) && sb.Equals(otherValue.sb);
     public bool Equals(string other) => sb.Equals(other);
 
     public bool ReferenceEquals(ReadOnlyStringBuilder other) => sb == other.sb;
+}
+
+internal class Chunk(string data)
+{
+    public string Data { get; } = data;
+    public ReadOnlySpan<char> Span => Data.AsSpan();
 }

@@ -219,7 +219,7 @@ internal struct WordWrappedText
 
     public WordWrappedText(IReadOnlyList<WrappedLine> wrappedLines, ConsoleCoordinate cursor)
     {
-        Debug.Assert(!wrappedLines[^1].Content.EndsWith('\n'));
+        Debug.Assert(!wrappedLines[^1].Content.EndsWith("\n"));
 
         WrappedLines = wrappedLines;
 

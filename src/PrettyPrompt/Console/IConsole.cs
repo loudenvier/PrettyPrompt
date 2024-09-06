@@ -69,12 +69,13 @@ public interface IConsole
     //we want to have StringBuilder writes in single Write call (we are checking result via NSubsitute).
     //If we would not override them results of test would be non-deterministic because
     //we do not have control over chunking policy of StringBuilder.
-
+    /*
     /// <inheritdoc cref="IConsoleX.Write(IConsole, ReadOnlySpan{char}, bool)"/>
     void Write(StringBuilder value, bool hideCursor = false)
     {
         if (hideCursor) HideCursor();
-        foreach (var chunkMemory in value.GetChunks()) Write(chunkMemory.Span);
+        //foreach (var chunkMemory in value.GetChunks()) Write(chunkMemory.Span);
+        Write(value.ToString());
         if (hideCursor) ShowCursor();
     }
 
@@ -82,7 +83,8 @@ public interface IConsole
     void WriteLine(StringBuilder value, bool hideCursor = false)
     {
         if (hideCursor) HideCursor();
-        foreach (var chunkMemory in value.GetChunks()) WriteLine(chunkMemory.Span);
+        //foreach (var chunkMemory in value.GetChunks()) WriteLine(chunkMemory.Span);
+        WriteLine(value.ToString());
         if (hideCursor) ShowCursor();
     }
 
@@ -90,7 +92,8 @@ public interface IConsole
     void WriteError(StringBuilder value, bool hideCursor = false)
     {
         if (hideCursor) HideCursor();
-        foreach (var chunkMemory in value.GetChunks()) WriteError(chunkMemory.Span);
+        //foreach (var chunkMemory in value.GetChunks()) WriteError(chunkMemory.Span);
+        WriteError(value.ToString());
         if (hideCursor) ShowCursor();
     }
 
@@ -98,9 +101,11 @@ public interface IConsole
     void WriteErrorLine(StringBuilder value, bool hideCursor = false)
     {
         if (hideCursor) HideCursor();
-        foreach (var chunkMemory in value.GetChunks()) WriteErrorLine(chunkMemory.Span);
+        //foreach (var chunkMemory in value.GetChunks()) WriteErrorLine(chunkMemory.Span);
+        WriteErrorLine(value.ToString());
         if (hideCursor) ShowCursor();
     }
+    */
     #endregion
 }
 
